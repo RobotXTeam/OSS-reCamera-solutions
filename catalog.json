@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "entries": [
+    {
+      "app_id": "yolo-detector",
+      "name": "Object Detection",
+      "name_zh": "通用目标检测",
+      "scene": "Security & Monitoring",
+      "scene_zh": "安防监控",
+      "description": "Keep an eye on what matters: people entering, vehicles arriving, objects appearing — 80 everyday object classes out of the box. Ideal for unattended entrances, warehouses and parking spots, with events pushed live to Home Assistant for alerts and automations.",
+      "description_zh": "看住你在意的每个角落：人员闯入、车辆到访、物品出现，80 类常见目标开箱即用。适合出入口、仓库、车位的无人值守监控，事件可实时推送到 Home Assistant 触发告警与联动。",
+      "package_file": "yolo26-detector_1.4.0_riscv64.deb",
+      "package_name": "yolo26-detector",
+      "package_version": "1.4.0",
+      "size": 368548,
+      "sha256": "6244ea99cc147a03d656ecafa6a280502080fcded952be8a16d34871ad7eb2e2",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/yolo26-detector_1.4.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/yolo26-detector_1.4.0_riscv64.deb"
+      ],
+      "category": "other",
+      "demo_category": "detection"
+    },
+    {
+      "app_id": "face-analysis",
+      "name": "Face Analysis",
+      "name_zh": "人脸分析",
+      "scene": "Data Capture",
+      "scene_zh": "数据采集",
+      "description": "A round-the-clock audience analyst for your store: builds hourly visitor profiles by gender and age group and reads emotional feedback, informing product selection, displays and campaigns. Analysis stays on the device — no face images leave the camera.",
+      "description_zh": "为门店打造的 24 小时客流分析师：按小时统计访客的性别与年龄结构，读取情绪反馈，为选品、陈列和活动提供依据。分析全程在设备本地完成，人脸图像不会离开摄像头。",
+      "package_file": "face-analysis_1.1.0_riscv64.deb",
+      "package_name": "face-analysis",
+      "package_version": "1.1.0",
+      "size": 432422,
+      "sha256": "1aec43820cb11ad06f9e9907bd9996144ac00eeb720da4d6d7e73df7084a014a",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/face-analysis_1.1.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/face-analysis_1.1.0_riscv64.deb"
+      ],
+      "category": "other",
+      "demo_category": "other"
+    },
+    {
+      "app_id": "ppocr-reader",
+      "name": "PP-OCR Text Reader",
+      "name_zh": "PP-OCR 文字识别",
+      "scene": "Data Capture",
+      "scene_zh": "数据采集",
+      "description": "Turn the camera into a tireless data-entry clerk: meter readings, container codes, shipping labels, station tags — point and read, in Chinese and English, with results flowing straight into your system. No more manual transcription.",
+      "description_zh": "把摄像头变成不知疲倦的“录入员”：仪表读数、集装箱号、面单编号、工位标签，对准即读、中英文皆可，识别结果直接进系统，告别人工抄录和录入错误。",
+      "package_file": "ppocr-reader_0.5.0_riscv64.deb",
+      "package_name": "ppocr-reader",
+      "package_version": "0.5.0",
+      "size": 345426,
+      "sha256": "01b44f0574a6e8853893b6d675aa5120e866eab88ad83c6540a97e8f8e219d00",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/ppocr-reader_0.5.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/ppocr-reader_0.5.0_riscv64.deb"
+      ],
+      "category": "other",
+      "demo_category": "ocr"
+    }
+  ]
+}
