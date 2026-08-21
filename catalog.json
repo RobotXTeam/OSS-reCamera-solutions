@@ -15,8 +15,8 @@
       "size": 368548,
       "sha256": "6244ea99cc147a03d656ecafa6a280502080fcded952be8a16d34871ad7eb2e2",
       "urls": [
-        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/yolo26-detector_1.4.0_riscv64.deb",
-        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/yolo26-detector_1.4.0_riscv64.deb"
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/yolo26-detector_1.4.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/yolo26-detector_1.4.0_riscv64.deb"
       ],
       "category": "other",
       "demo_category": "detection"
@@ -35,8 +35,8 @@
       "size": 432422,
       "sha256": "1aec43820cb11ad06f9e9907bd9996144ac00eeb720da4d6d7e73df7084a014a",
       "urls": [
-        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/face-analysis_1.1.0_riscv64.deb",
-        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/face-analysis_1.1.0_riscv64.deb"
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/face-analysis_1.1.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/face-analysis_1.1.0_riscv64.deb"
       ],
       "category": "other",
       "demo_category": "other"
@@ -55,8 +55,8 @@
       "size": 345426,
       "sha256": "01b44f0574a6e8853893b6d675aa5120e866eab88ad83c6540a97e8f8e219d00",
       "urls": [
-        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/ppocr-reader_0.5.0_riscv64.deb",
-        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/ppocr-reader_0.5.0_riscv64.deb"
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/ppocr-reader_0.5.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/ppocr-reader_0.5.0_riscv64.deb"
       ],
       "category": "other",
       "demo_category": "ocr"
