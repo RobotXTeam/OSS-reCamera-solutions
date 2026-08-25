@@ -75,8 +75,8 @@
       "package_file": "groove-features_1.0.0_riscv64.deb",
       "package_name": "groove-features",
       "package_version": "1.0.0",
-      "size": 2351078,
-      "sha256": "f1c4128802fe854cbafe83294599f368ba31a6a882bcfba5051f39efbb4b8a5e",
+      "size": 2767772,
+      "sha256": "d9d305b8c989029ac81f403eb04ce6863a80dcb39d24209dc37a9659d128da20",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Factory/groove-features_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Factory/groove-features_1.0.0_riscv64.deb"
@@ -96,8 +96,8 @@
       "package_file": "hand-gesture_1.0.0_riscv64.deb",
       "package_name": "hand-gesture",
       "package_version": "1.0.0",
-      "size": 3235176,
-      "sha256": "448bd94068a532efa3050ccaad9f9829a7e34280759011437b30106266331b23",
+      "size": 3305048,
+      "sha256": "7341af245d4204761314fc6671fde2b4c2f87555899d71578eae94c523f6e032",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Medical/hand-gesture_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Medical/hand-gesture_1.0.0_riscv64.deb"
@@ -117,8 +117,8 @@
       "package_file": "onvif-yolo_1.0.0_riscv64.deb",
       "package_name": "onvif-yolo",
       "package_version": "1.0.0",
-      "size": 2637724,
-      "sha256": "1be8922c8a8b0215305c80ebc3a59738283291af3d26361d1dd140073f964e1f",
+      "size": 2645606,
+      "sha256": "b4e1dcf99d00ec3efb2bb90cfb74277143dae71bcf55f833942595739387b421",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Building/onvif-yolo_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Building/onvif-yolo_1.0.0_riscv64.deb"
