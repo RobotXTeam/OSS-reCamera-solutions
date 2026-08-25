@@ -14,8 +14,8 @@ tokens below are the approved local values.
 
 | Class     | When                          | How                                    |
 |-----------|-------------------------------|----------------------------------------|
-| FRAMED    | a real device screenshot exists | `stylekit.frame_screenshot()` — cover-fit to canvas, top/bottom legibility scrims, standard chrome |
-| RENDERED  | no screenshot (model-free, pipelines) | kit primitives only: `canvas()`, `chip()`, `dashed_rect()`, fonts |
+| FRAMED    | an existing raster source exists (real device screenshot, or firmware-shipped illustration) | `stylekit.frame_screenshot()` — cover-fit to canvas, top/bottom legibility scrims, standard chrome |
+| RENDERED  | no source material (model-free apps, pipelines) | kit primitives only: `canvas()`, `chip()`, `dashed_rect()`, fonts |
 
 Both classes carry the identical chrome, so the Solutions gallery reads as
 one family regardless of source material.
@@ -24,7 +24,7 @@ one family regardless of source material.
 
 - 1280×720 px, RGB PNG.
 - Background (RENDERED): vertical gradient `#141A22 → #1F2937`.
-- FRAMED screenshots get black scrims (alpha ≤ 150, 150 px deep) at top and
+- FRAMED sources get black scrims (alpha ≤ 150, 150 px deep) at top and
   bottom so chips always sit on ≥ 4.5:1 contrast.
 
 ## Chrome layout zones
@@ -40,6 +40,8 @@ Chip = rounded rect (radius 8) fill `#0F141C`, 1 px edge `#3C4A5C`,
 
 ## Palette (hex / role)
 
+Annotation tokens:
+
 | Token     | Value     | Use                                   |
 |-----------|-----------|---------------------------------------|
 | bg-top    | `#141A22` | canvas gradient start                  |
@@ -52,9 +54,22 @@ Chip = rounded rect (radius 8) fill `#0F141C`, 1 px edge `#3C4A5C`,
 | chip-bg   | `#0F141C` | chip fill                              |
 | chip-edge | `#3C4A5C` | chip border                            |
 
+Auxiliary subject tokens (RENDERED illustrations only):
+
+| Token        | Value     | Use                                  |
+|--------------|-----------|--------------------------------------|
+| metal        | `#C8D0D8` | workpiece / subject body              |
+| metal-line   | `#B8C0C9` | surface detail lines on the body      |
+| metal-edge   | `#5A6470` | subject outline                       |
+| inset        | `#2A3138` | dark insets on the subject (grooves)  |
+| green-dim    | `#9FE8B8` | secondary log / readout lines         |
+| green-dimmer | `#6EA080` | tertiary log lines                    |
+
 Annotation colors are semantic: green = detection output, amber = region of
-interest, cyan = tracking. Do not introduce a new hue without updating this
-table first.
+interest, cyan = tracking. The semantics apply to kit-rendered artwork;
+FRAMED sources keep the device's own OSD colors as-is (a real screenshot is
+evidence and is not restyled — e.g. onvif-yolo's red detection boxes stay
+red). Do not introduce a new hue without updating these tables first.
 
 ## Typography
 
@@ -69,7 +84,7 @@ table first.
 - Generators: `make_<id>.py` (or grouped, e.g. `make_previews.py`), importing
   `stylekit`.
 - Output: `tools/artwork/<id>.png` (committed; GitHub previews it).
-- Raw screenshots: `tools/artwork/sources/<id>_raw.png` (committed, keeps the
+- Source rasters: `tools/artwork/sources/<id>_raw.png` (committed, keeps the
   repo self-contained).
 - In-deb copy: `userdata/local/apps/img/<id>.png`, referenced by the manifest
   as `"image": "/appimg/<id>.png"`. Byte-identical to the tools/artwork copy.
@@ -78,7 +93,8 @@ table first.
 
 ## Adding artwork for a new package
 
-1. Real screenshot available? → FRAMED: write `make_<id>.py` calling
+1. Raster source available (screenshot or firmware illustration)? → FRAMED:
+   write `make_<id>.py` calling
    `frame_screenshot(sources/<id>_raw.png, EN, ZH, footer)`.
    Otherwise RENDERED: compose with kit primitives on `canvas()`.
 2. Run the script; commit `<id>.png` + script (+ `sources/` raw).
@@ -91,6 +107,7 @@ table first.
 
 - [ ] 1280×720 RGB, opens clean (`PIL.Image.verify()`).
 - [ ] Title/sub/footer chips present, unclipped, inside the layout zones.
-- [ ] Only palette colors above; annotation colors used with their semantics.
+- [ ] Only palette/auxiliary tokens above (RENDERED); FRAMED source pixels
+      are exempt by definition.
 - [ ] Text ≥ 4.5:1 against underlying pixels.
 - [ ] In-deb copy byte-identical to `tools/artwork/<id>.png`.
