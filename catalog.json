@@ -60,6 +60,66 @@
       ],
       "category": "other",
       "demo_category": "ocr"
+    },
+    {
+      "app_id": "groove-features",
+      "name": "Groove Features Counter",
+      "name_zh": "凹槽特征计数器",
+      "scene": "Factory Automation",
+      "scene_zh": "工厂制造",
+      "description": "Count what the line makes, frame by frame: grooves, ribs and vertical bars detected and counted live on the camera, with JPEG + bounding-box results streamed over UDP to your host system. A pure OpenCV pipeline — ROI crop, threshold, morphology, contour filtering — no model training, no cloud. A drop-in counter for feed lines, extrusion and stamping stations.",
+      "description_zh": "逐帧清点产线成果：凹槽、肋条与竖条特征在摄像头本地实时检测计数，JPEG 与检测框经 UDP 实时回传上位机。纯 OpenCV 管线——ROI 裁剪、阈值化、形态学、轮廓筛选——无需训练模型、不依赖云端。上料线、挤出与冲压工位的即装即用计数器。",
+      "package_file": "groove-features_1.0.0_riscv64.deb",
+      "package_name": "groove-features",
+      "package_version": "1.0.0",
+      "size": 2306248,
+      "sha256": "6a993add36532cb3bccfd3f841503ae19aa1fc39489bf386dc9b5296e48f5771",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Factory/groove-features_1.0.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Factory/groove-features_1.0.0_riscv64.deb"
+      ],
+      "category": "factory",
+      "demo_category": "other"
+    },
+    {
+      "app_id": "hand-gesture",
+      "name": "Hand Gesture Recognition",
+      "name_zh": "手势识别",
+      "scene": "Healthcare & Elder Care",
+      "scene_zh": "医疗养老",
+      "description": "A contact-free interaction assistant for care settings: the full MediaPipe hand pipeline on the NPU — palm detection, 21-point landmarks, embedding and gesture classification — recognises 8 gestures (open palm, fist, thumbs up and more) and streams results with video over UDP. Touchless calling, bed-exit signals and routine checks, no wearables needed.",
+      "description_zh": "照护场景的免接触交互助手：NPU 上运行完整 MediaPipe 手部流水线——手掌检测、21 点关键点、嵌入与手势分类——识别 8 种手势（张掌、握拳、竖大拇指等），结果与画面经 UDP 推流。无需穿戴即可实现呼叫、离床提示与日常巡查。",
+      "package_file": "hand-gesture_1.0.0_riscv64.deb",
+      "package_name": "hand-gesture",
+      "package_version": "1.0.0",
+      "size": 3181478,
+      "sha256": "8f2ee2d91adbbe9ab3fd1ef5a32086ef1ab445166b3143ade7e0b1dcce123c5e",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Medical/hand-gesture_1.0.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Medical/hand-gesture_1.0.0_riscv64.deb"
+      ],
+      "category": "medical",
+      "demo_category": "tracking"
+    },
+    {
+      "app_id": "onvif-yolo",
+      "name": "ONVIF YOLO Detector",
+      "name_zh": "ONVIF 目标检测",
+      "scene": "Building Management",
+      "scene_zh": "楼宇管理",
+      "description": "Turn the reCamera into a standards-based AI IPC: ONVIF discovery and SOAP services let any VMS or NVR find it out of the box, while YOLO11n detects 80 object classes with boxes burned into the H.264 RTSP stream by the hardware OSD. Capture, inference, overlay and streaming in one native process — drops straight into a building's existing surveillance stack.",
+      "description_zh": "把 reCamera 变成标准 AI 网络摄像机：ONVIF 发现与 SOAP 服务让任意 VMS/NVR 即插即用；YOLO11n 实时检测 80 类目标，检测框经硬件 OSD 叠入 H.264 RTSP 流。采集、推理、画框、推流单进程完成，直接接入楼宇既有监控体系。",
+      "package_file": "onvif-yolo_1.0.0_riscv64.deb",
+      "package_name": "onvif-yolo",
+      "package_version": "1.0.0",
+      "size": 3441622,
+      "sha256": "d213a9861755b486dc14748dc3e940e111b391c6ac16191fb55fdd39dac678ab",
+      "urls": [
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Building/onvif-yolo_1.0.0_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Building/onvif-yolo_1.0.0_riscv64.deb"
+      ],
+      "category": "building",
+      "demo_category": "detection"
     }
   ]
 }
