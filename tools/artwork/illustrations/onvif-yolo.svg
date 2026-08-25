@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9FB0C2"/>
+      <stop offset="1" stop-color="#76889C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.75">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <rect x="40" y="40" width="1200" height="640" rx="28" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="2"/>
+
+  <!-- doorway -->
+  <rect x="196" y="166" width="198" height="338" rx="6" fill="#6B7C90"/>
+  <rect x="212" y="182" width="166" height="322" fill="#3E4C5E"/>
+
+  <!-- ceiling camera + vision cone -->
+  <line x1="640" y1="66" x2="640" y2="102" stroke="#3E4C5E" stroke-width="8"/>
+  <rect x="596" y="102" width="88" height="46" rx="12" fill="#3E4C5E"/>
+  <circle cx="640" cy="125" r="11" fill="#9FB0C2"/>
+  <circle cx="640" cy="125" r="5" fill="#1F2937"/>
+  <polygon points="640,150 320,520 980,520" fill="#FFFFFF" opacity="0.15"/>
+
+  <!-- walking person -->
+  <circle cx="560" cy="292" r="26" fill="#E8C39E"/>
+  <rect x="532" y="322" width="56" height="116" rx="26" fill="#334155"/>
+  <line x1="548" y1="436" x2="534" y2="506" stroke="#334155" stroke-width="16" stroke-linecap="round"/>
+  <line x1="572" y1="436" x2="590" y2="506" stroke="#334155" stroke-width="16" stroke-linecap="round"/>
+  <line x1="536" y1="344" x2="516" y2="398" stroke="#334155" stroke-width="13" stroke-linecap="round"/>
+  <line x1="584" y1="344" x2="606" y2="396" stroke="#334155" stroke-width="13" stroke-linecap="round"/>
+  <rect x="596" y="376" width="34" height="30" rx="5" fill="#B08954"/>
+
+  <!-- office chair -->
+  <rect x="790" y="428" width="96" height="24" rx="8" fill="#3E4C5E"/>
+  <rect x="874" y="344" width="20" height="96" rx="9" fill="#3E4C5E"/>
+  <line x1="838" y1="452" x2="838" y2="500" stroke="#334155" stroke-width="10"/>
+  <line x1="812" y1="506" x2="866" y2="506" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- desk + VMS monitor -->
+  <rect x="960" y="428" width="230" height="16" rx="6" fill="#6B7C90"/>
+  <rect x="976" y="444" width="12" height="70" fill="#334155"/>
+  <rect x="1160" y="444" width="12" height="70" fill="#334155"/>
+  <rect x="1020" y="340" width="104" height="66" rx="8" fill="#334155"/>
+  <rect x="1030" y="350" width="84" height="46" rx="4" fill="#9FB0C2"/>
+  <rect x="1064" y="406" width="16" height="22" fill="#334155"/>
+
+  <!-- detection boxes + chips -->
+  <rect x="500" y="258" width="126" height="258" fill="none" stroke="#B8E356" stroke-width="3"/>
+  <rect x="500" y="220" width="112" height="34" rx="8" fill="#D3F28A"/>
+  <text x="518" y="244" font-family="DejaVu Sans" font-weight="bold" font-size="19" fill="#3E4C5E">PERSON</text>
+  <rect x="776" y="332" width="132" height="132" fill="none" stroke="#B8E356" stroke-width="3"/>
+  <rect x="776" y="294" width="96" height="34" rx="8" fill="#D3F28A"/>
+  <text x="794" y="318" font-family="DejaVu Sans" font-weight="bold" font-size="19" fill="#3E4C5E">CHAIR</text>
+
+  <!-- callouts -->
+  <polyline points="1124,368 1170,330 1196,330" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="2"/>
+  <circle cx="1196" cy="330" r="3.5" fill="#FFFFFF"/>
+  <text x="1080" y="300" font-family="DejaVu Sans" font-size="20" fill="#FFFFFF" opacity="0.9">VMS</text>
+  <polyline points="596,116 470,96 420,96" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="2"/>
+  <circle cx="420" cy="96" r="3.5" fill="#FFFFFF"/>
+  <text x="300" y="102" font-family="DejaVu Sans" font-size="20" fill="#FFFFFF" opacity="0.9">ONVIF CAM</text>
+
+  <!-- caption -->
+  <g font-family="DejaVu Sans" font-weight="bold" fill="#FFFFFF" opacity="0.55" text-anchor="end" letter-spacing="2">
+    <text x="1180" y="600" font-size="34">ONVIF AI IPC</text>
+    <text x="1180" y="640" font-size="26">YOLO11N - RTSP - HW OSD</text>
+  </g>
+</svg>

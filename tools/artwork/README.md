@@ -10,15 +10,21 @@ Design baseline follows the `ui` design-intelligence skill's dark-slate
 recommendation (OLED dark mode, status green, high-contrast text); the exact
 tokens below are the approved local values.
 
-## Two artwork classes, one chrome
+Repo policy: gallery artwork never contains real camera footage. Scenes are
+illustrated (flat vector style) or reuse existing illustrated rasters; the
+chrome on top is always the kit's.
 
-| Class     | When                          | How                                    |
-|-----------|-------------------------------|----------------------------------------|
-| FRAMED    | an existing raster source exists (real device screenshot, or firmware-shipped illustration) | `stylekit.frame_screenshot()` — cover-fit to canvas, top/bottom legibility scrims, standard chrome |
-| RENDERED  | no source material (model-free apps, pipelines) | kit primitives only: `canvas()`, `chip()`, `dashed_rect()`, fonts |
+## Artwork classes, one chrome
 
-Both classes carry the identical chrome, so the Solutions gallery reads as
-one family regardless of source material.
+| Class       | When                          | How                                    |
+|-------------|-------------------------------|----------------------------------------|
+| ILLUSTRATED | default for app scenes        | hand-authored flat SVG scene in `illustrations/<id>.svg` (light slate gradient, thin rounded frame, flat objects, lime label chips, white callouts, translucent bottom-right caption), rasterized by cairosvg at 1280×720, then `frame_screenshot()` chrome |
+| FRAMED      | an existing illustrated raster source (e.g. firmware-shipped art) | `frame_screenshot()` — cover-fit, legibility scrims, standard chrome |
+
+The older kit-primitive RENDERED schematics are retired; the primitives
+(`canvas()`, `chip()`, `dashed_rect()`) stay in `stylekit.py` as the chrome
+and composition backbone. All classes carry the identical chrome so the
+Solutions gallery reads as one family.
 
 ## Canvas
 
@@ -65,11 +71,11 @@ Auxiliary subject tokens (RENDERED illustrations only):
 | green-dim    | `#9FE8B8` | secondary log / readout lines         |
 | green-dimmer | `#6EA080` | tertiary log lines                    |
 
-Annotation colors are semantic: green = detection output, amber = region of
-interest, cyan = tracking. The semantics apply to kit-rendered artwork;
-FRAMED sources keep the device's own OSD colors as-is (a real screenshot is
-evidence and is not restyled — e.g. onvif-yolo's red detection boxes stay
-red). Do not introduce a new hue without updating these tables first.
+Annotation colors are semantic: green/lime = detection output, amber = region
+of interest, cyan = tracking. ILLUSTRATED scenes use the firmware-illustration
+lime (`#B8E356` boxes, `#D3F28A` label chips) for detections; FRAMED sources
+keep their original colors as-is. Do not introduce a new hue without updating
+these tables first.
 
 ## Typography
 
@@ -81,8 +87,10 @@ red). Do not introduce a new hue without updating these tables first.
 
 ## Files & naming
 
-- Generators: `make_<id>.py` (or grouped, e.g. `make_previews.py`), importing
-  `stylekit`.
+- Generators: `make_illustrated.py` (SVG → cairosvg → chrome) and
+  `make_previews.py` (FRAMED firmware rasters), importing `stylekit`.
+- Vector sources: `illustrations/<id>.svg` (committed; the editable truth for
+  ILLUSTRATED art). Render dependency: `pip install cairosvg`.
 - Output: `tools/artwork/<id>.png` (committed; GitHub previews it).
 - Source rasters: `tools/artwork/sources/<id>_raw.png` (committed, keeps the
   repo self-contained).
@@ -93,11 +101,11 @@ red). Do not introduce a new hue without updating these tables first.
 
 ## Adding artwork for a new package
 
-1. Raster source available (screenshot or firmware illustration)? → FRAMED:
-   write `make_<id>.py` calling
-   `frame_screenshot(sources/<id>_raw.png, EN, ZH, footer)`.
-   Otherwise RENDERED: compose with kit primitives on `canvas()`.
-2. Run the script; commit `<id>.png` + script (+ `sources/` raw).
+1. Author the scene: copy an existing `illustrations/<id>.svg` as template,
+   register the app in `make_illustrated.py` (renders + applies chrome).
+   Only if an illustrated raster already exists → FRAMED via
+   `frame_screenshot()` (see `make_previews.py`). Never use real footage.
+2. Run the script; commit `<id>.png` + `.svg` (+ `sources/` raw if FRAMED).
 3. Ship the same PNG inside the deb at `userdata/local/apps/img/<id>.png`
    and set the manifest `image` field.
 4. Add the catalog entry's optional `image` URL.
@@ -107,7 +115,7 @@ red). Do not introduce a new hue without updating these tables first.
 
 - [ ] 1280×720 RGB, opens clean (`PIL.Image.verify()`).
 - [ ] Title/sub/footer chips present, unclipped, inside the layout zones.
-- [ ] Only palette/auxiliary tokens above (RENDERED); FRAMED source pixels
-      are exempt by definition.
+- [ ] Only palette/auxiliary tokens above (ILLUSTRATED); FRAMED source pixels
+      are exempt by definition. No real camera footage.
 - [ ] Text ≥ 4.5:1 against underlying pixels.
 - [ ] In-deb copy byte-identical to `tools/artwork/<id>.png`.
