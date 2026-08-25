@@ -72,8 +72,8 @@
       "package_file": "groove-features_1.0.0_riscv64.deb",
       "package_name": "groove-features",
       "package_version": "1.0.0",
-      "size": 2306248,
-      "sha256": "6a993add36532cb3bccfd3f841503ae19aa1fc39489bf386dc9b5296e48f5771",
+      "size": 2306280,
+      "sha256": "eaee20520fe3bb28e70a6360362aa3b09b0968be8d477f9c11c4cd0a0caffc1b",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Factory/groove-features_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Factory/groove-features_1.0.0_riscv64.deb"
@@ -92,8 +92,8 @@
       "package_file": "hand-gesture_1.0.0_riscv64.deb",
       "package_name": "hand-gesture",
       "package_version": "1.0.0",
-      "size": 3181478,
-      "sha256": "8f2ee2d91adbbe9ab3fd1ef5a32086ef1ab445166b3143ade7e0b1dcce123c5e",
+      "size": 3178434,
+      "sha256": "85f16d3797c994190cffe34068f850d401d6af2cb72a3c7a766f079d2073c9b1",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Medical/hand-gesture_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Medical/hand-gesture_1.0.0_riscv64.deb"

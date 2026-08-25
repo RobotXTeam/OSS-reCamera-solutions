@@ -17,6 +17,11 @@ packages/                          # riscv64 solution packages, grouped by
 firmware/                          # firmware channel
   ├── latest.json                  # machine-readable "latest firmware" pointer
   └── README.md                    # firmware publishing rules (GitHub Releases)
+tools/artwork/                     # shared PIL style kit (stylekit.py) + the
+                                   # generators behind the generated showcase
+                                   # PNGs; new generated artwork must render
+                                   # through the kit so the gallery stays one
+                                   # visual family
 ```
 
 The `packages/<Category>/` directory mirrors the web UI's Solutions
