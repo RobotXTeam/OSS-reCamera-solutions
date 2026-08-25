@@ -19,7 +19,8 @@
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/yolo26-detector_1.4.0_riscv64.deb"
       ],
       "category": "other",
-      "demo_category": "detection"
+      "demo_category": "detection",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/yolo-detector.png"
     },
     {
       "app_id": "face-analysis",
@@ -39,7 +40,8 @@
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/face-analysis_1.1.0_riscv64.deb"
       ],
       "category": "other",
-      "demo_category": "other"
+      "demo_category": "other",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/face-analysis.png"
     },
     {
       "app_id": "ppocr-reader",
@@ -59,7 +61,8 @@
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/ppocr-reader_0.5.0_riscv64.deb"
       ],
       "category": "other",
-      "demo_category": "ocr"
+      "demo_category": "ocr",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/ppocr-reader.png"
     },
     {
       "app_id": "groove-features",
@@ -79,7 +82,8 @@
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Factory/groove-features_1.0.0_riscv64.deb"
       ],
       "category": "factory",
-      "demo_category": "other"
+      "demo_category": "other",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/groove-features.png"
     },
     {
       "app_id": "hand-gesture",
@@ -99,7 +103,8 @@
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Medical/hand-gesture_1.0.0_riscv64.deb"
       ],
       "category": "medical",
-      "demo_category": "tracking"
+      "demo_category": "tracking",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/hand-gesture.png"
     },
     {
       "app_id": "onvif-yolo",
@@ -112,14 +117,15 @@
       "package_file": "onvif-yolo_1.0.0_riscv64.deb",
       "package_name": "onvif-yolo",
       "package_version": "1.0.0",
-      "size": 3441622,
-      "sha256": "d213a9861755b486dc14748dc3e940e111b391c6ac16191fb55fdd39dac678ab",
+      "size": 3209588,
+      "sha256": "7eb09cb7b118e14014c4e00e30569b8bb3e1c68be3fca5fba2f2501fde0985fb",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Building/onvif-yolo_1.0.0_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Building/onvif-yolo_1.0.0_riscv64.deb"
       ],
       "category": "building",
-      "demo_category": "detection"
+      "demo_category": "detection",
+      "image": "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/tools/artwork/onvif-yolo.png"
     }
   ]
 }

@@ -77,3 +77,39 @@ def dashed_rect(d, x0, y0, x1, y1, color, width=2, dash=14, gap=10):
                     (ax + ux * (pos + seg), ay + uy * (pos + seg))],
                    fill=color, width=width)
             pos += dash + gap
+
+
+def _cover(img, w=W, h=H):
+    """Center-crop + resize to the canvas (cover fit)."""
+    iw, ih = img.size
+    s = max(w / iw, h / ih)
+    nw, nh = round(iw * s), round(ih * s)
+    img = img.resize((nw, nh), Image.LANCZOS)
+    l, t = (nw - w) // 2, (nh - h) // 2
+    return img.crop((l, t, l + w, t + h))
+
+
+def frame_screenshot(src, title_en, title_zh, footer):
+    """Standard chrome over a real device screenshot.
+
+    Cover-fits the screenshot to 1280x720, lays top/bottom scrims for
+    legibility, then draws the same title + footer chips the generated
+    art uses, so real and rendered artwork read as one family.
+    Returns an RGB Image.
+    """
+    base = _cover(Image.open(src).convert("RGB"))
+    scrim = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(scrim)
+    DEPTH = 150
+    for y in range(DEPTH):  # top scrim, fades down
+        a = int(150 * (1 - y / DEPTH))
+        sd.line([(0, y), (W, y)], fill=(8, 12, 18, a))
+    for y in range(H - DEPTH, H):  # bottom scrim, fades up
+        a = int(150 * (1 - (H - 1 - y) / DEPTH))
+        sd.line([(0, y), (W, y)], fill=(8, 12, 18, a))
+    base = Image.alpha_composite(base.convert("RGBA"), scrim).convert("RGB")
+    d = ImageDraw.Draw(base)
+    chip(d, 24, 20, title_en, size=26, bold=True)
+    chip(d, 24, 64, title_zh, size=24, cjk=True, fg=TEXT_DIM)
+    chip_right(d, W - 24, H - 60, footer, size=19)
+    return base

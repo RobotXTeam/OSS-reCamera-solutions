@@ -45,6 +45,7 @@ The top-level object has `format: 1` and an `entries` array. Each entry:
 | `size`            | number   | exact byte size of the package                               |
 | `sha256`          | string   | lowercase hex sha256 of the package                          |
 | `urls`            | string[] | 1-8 download URLs, tried in order (mirror fallback)          |
+| `image`           | string   | optional gallery-card artwork URL (see `tools/artwork/`)     |
 | `category`        | string   | Solutions gallery category (see layout above)                |
 | `demo_category`   | string   | optional Demos-page hint                                     |
 
