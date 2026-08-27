@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 import re
@@ -17,6 +18,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tarfile
 import tempfile
 from pathlib import Path
 
@@ -169,6 +171,28 @@ def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> lis
             "device opkg requires exactly debian-binary, control.tar.gz and "
             f"data.tar.gz; found {', '.join(members)}"
         )
+    else:
+        archive = subprocess.run(
+            ["ar", "p", str(deb), "data.tar.gz"], capture_output=True
+        )
+        if archive.returncode:
+            fail("cannot read data.tar.gz for ownership validation")
+        else:
+            try:
+                with tarfile.open(fileobj=io.BytesIO(archive.stdout), mode="r:gz") as payload:
+                    wrong_owner = [
+                        member.name
+                        for member in payload.getmembers()
+                        if member.uid != 0 or member.gid != 0
+                    ]
+                if wrong_owner:
+                    sample = ", ".join(wrong_owner[:3])
+                    fail(
+                        "package payload must be root:root; rebuild with "
+                        f"--root-owner-group (examples: {sample})"
+                    )
+            except tarfile.TarError as exc:
+                fail(f"cannot inspect data.tar.gz ownership: {exc}")
 
     try:
         fields = [

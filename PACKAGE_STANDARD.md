@@ -87,6 +87,10 @@ is ignored by the application fails the release gate.
    dpkg-deb -Zgzip -z9 --root-owner-group -b <package-root> <output.deb>
    ```
 
+   `--root-owner-group` is mandatory. Studio rejects non-root-owned init
+   scripts, so a package whose payload records the developer's local UID/GID
+   will appear as “runtime files incomplete” even when every path exists.
+
 3. Update `catalog.json` size and SHA256.
 4. Run the complete static gate:
 
