@@ -41,6 +41,7 @@ solution-specific frontend code is required.
 "config_schema": {
   "groups": [{
     "key": "detection",
+    "scope": "application",
     "title": "Detection",
     "title_zh": "检测",
     "items": [{
@@ -59,6 +60,18 @@ solution-specific frontend code is required.
   }]
 }
 ```
+
+Each group or individual item may declare `scope`:
+
+- `"application"` — inference and application behavior such as confidence,
+  thresholds, regions and model parameters.
+- `"connection"` — transport and destination settings such as MQTT, RTSP,
+  broker host/port, topic, URL or endpoint.
+
+An item-level scope overrides its group. When omitted, Studio automatically
+classifies common connection keys (`mqtt_*`, `rtsp_*`, `*_host`, `*_port`,
+`*_topic`, `*_url`, and similar); all remaining items are application
+parameters. Empty sections are not displayed.
 
 Supported item types are `number`, `boolean`, `enum`, `string`, `zone` and
 `line`. A 0–100 `number` is rendered as a percentage slider with a synchronized

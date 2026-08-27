@@ -29,6 +29,7 @@ SAFE_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 SAFE_FILE = re.compile(r"^[A-Za-z0-9._+-]+\.deb$")
 SAFE_CONFIG_KEY = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
 CONFIG_TYPES = {"number", "boolean", "enum", "string", "zone", "line"}
+CONFIG_SCOPES = {"application", "connection"}
 CATEGORY_DIRS = {
     "factory": "Factory",
     "building": "Building",
@@ -79,6 +80,9 @@ def validate_config_schema(schema: object, fail) -> None:
         if not isinstance(group, dict):
             fail(f"config_schema.groups[{group_index}] must be an object")
             continue
+        group_scope = group.get("scope")
+        if group_scope is not None and group_scope not in CONFIG_SCOPES:
+            fail(f"config group {group_index} has invalid scope {group_scope!r}")
         items = group.get("items")
         if not isinstance(items, list) or not items:
             fail(f"config group {group_index} must contain at least one item")
@@ -98,6 +102,9 @@ def validate_config_schema(schema: object, fail) -> None:
             if item_type not in CONFIG_TYPES:
                 fail(f"{label} has unsupported type {item_type!r}")
                 continue
+            item_scope = item.get("scope")
+            if item_scope is not None and item_scope not in CONFIG_SCOPES:
+                fail(f"{label} has invalid scope {item_scope!r}")
             if not isinstance(item.get("title"), str) or not isinstance(item.get("title_zh"), str):
                 fail(f"{label} requires title and title_zh")
             default = item.get("default")
