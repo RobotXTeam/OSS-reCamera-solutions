@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog.json"
 SAFE_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 SAFE_FILE = re.compile(r"^[A-Za-z0-9._+-]+\.deb$")
+SAFE_CONFIG_KEY = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
+CONFIG_TYPES = {"number", "boolean", "enum", "string", "zone", "line"}
 CATEGORY_DIRS = {
     "factory": "Factory",
     "building": "Building",
@@ -60,6 +62,57 @@ def package_path(entry: dict) -> Path:
     if not folder:
         raise ValueError(f"unsupported category: {category!r}")
     return ROOT / "packages" / folder / entry.get("package_file", "")
+
+
+def validate_config_schema(schema: object, fail) -> None:
+    if not isinstance(schema, dict):
+        fail("manifest config_schema must be an object")
+        return
+    groups = schema.get("groups")
+    if not isinstance(groups, list) or not groups:
+        fail("config_schema.groups must be a non-empty list")
+        return
+    seen: set[str] = set()
+    for group_index, group in enumerate(groups):
+        if not isinstance(group, dict):
+            fail(f"config_schema.groups[{group_index}] must be an object")
+            continue
+        items = group.get("items")
+        if not isinstance(items, list) or not items:
+            fail(f"config group {group_index} must contain at least one item")
+            continue
+        for item_index, item in enumerate(items):
+            label = f"config item {group_index}.{item_index}"
+            if not isinstance(item, dict):
+                fail(f"{label} must be an object")
+                continue
+            key = item.get("key", "")
+            if not SAFE_CONFIG_KEY.fullmatch(key):
+                fail(f"{label} has invalid key {key!r}")
+            elif key in seen:
+                fail(f"duplicate config key {key!r}")
+            seen.add(key)
+            item_type = item.get("type")
+            if item_type not in CONFIG_TYPES:
+                fail(f"{label} has unsupported type {item_type!r}")
+                continue
+            if not isinstance(item.get("title"), str) or not isinstance(item.get("title_zh"), str):
+                fail(f"{label} requires title and title_zh")
+            default = item.get("default")
+            if item_type == "number":
+                low, high = item.get("min"), item.get("max")
+                if not all(isinstance(value, (int, float)) and not isinstance(value, bool) for value in (low, high, default)):
+                    fail(f"{label} number requires numeric min, max and default")
+                elif low >= high or not low <= default <= high:
+                    fail(f"{label} requires min < max and default inside the range")
+            elif item_type == "boolean" and not isinstance(default, bool):
+                fail(f"{label} boolean requires a boolean default")
+            elif item_type == "string" and not isinstance(default, str):
+                fail(f"{label} string requires a string default")
+            elif item_type == "enum":
+                options = item.get("options")
+                if not isinstance(options, list) or not options:
+                    fail(f"{label} enum requires non-empty options")
 
 
 def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> list[str]:
@@ -198,6 +251,16 @@ def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> lis
                 fail("debug_ws.video_path must be /")
             if debug_ws.get("results_path") != "/results":
                 fail("debug_ws.results_path must be /results")
+
+        if "config_schema" in manifest:
+            validate_config_schema(manifest["config_schema"], fail)
+            run_script = root / "userdata/local/apps" / app_id / "run.sh"
+            if not executable(run_script):
+                fail(f"configurable solution requires executable {run_script.relative_to(root)}")
+            else:
+                run_text = run_script.read_text(encoding="utf-8", errors="replace")
+                if ".config.json" not in run_text or app_id not in run_text:
+                    fail("configurable solution run.sh must consume <app-id>.config.json")
 
         binary = root / "usr/local/bin" / app_id
         if not executable(binary):
