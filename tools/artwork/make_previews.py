@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Unified catalog previews for the legacy Other/ packages.
+"""Unified catalog previews for the Other/ application packages.
 
-These debs ship no in-package image (their device art lives in the
-supervisor firmware); the previews keep this repo's gallery artwork in
-one visual family via the standard screenshot chrome.
+The previews are used both by the online catalog and inside each package.
 """
 import os
 
@@ -12,8 +10,6 @@ import stylekit as sk
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 PREVIEWS = [
-    ("yolo-detector", "Object Detection", "通用目标检测",
-     "YOLO - 80 classes - MQTT + RTSP"),
     ("face-analysis", "Face Analysis", "人脸分析",
      "on-device gender / age / emotion"),
     ("ppocr-reader", "PP-OCR Text Reader", "PP-OCR 文字识别",
