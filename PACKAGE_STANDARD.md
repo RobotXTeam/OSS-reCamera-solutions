@@ -30,6 +30,33 @@ The application must actually start the repository `debug_stream` component on
 port 8001 and publish H.264 frames. UDP, MQTT, RTSP and ONVIF are optional
 additional outputs; none of them replaces the WebSocket preview contract.
 
+## Camera ownership and handoff contract
+
+Camera ownership belongs to Supervisor, not to an individual solution. Every
+transition (solution to solution, solution to live preview, and live preview to
+solution) is one serialized transaction: stop the current owner, verify that
+`/dev/cvi-vpss` is free, start the target, verify one owner plus a ready H.264
+listener on port 8001, and roll back to the previous owner if startup fails.
+
+A solution must therefore follow these lifecycle rules:
+
+- Its init script controls only its own exact process and never starts, stops or
+  kills another solution.
+- `start` returns success only after the process has been launched reliably.
+- `stop` first sends `TERM` to the PID it owns, waits for bounded graceful
+  cleanup, and removes stale PID/readiness files. Do not use `killall` or broad
+  `pkill` cleanup.
+- The process must release all camera/VPSS resources when it receives `TERM`.
+- `status` must distinguish a live owned process from a stale PID file.
+
+Supervisor remains the final recovery authority and may terminate the actual
+process holding `/dev/cvi-vpss` if a broken solution exceeds the release
+deadline. This recovery is a safety net, not a substitute for correct cleanup.
+
+The device transition test automatically discovers every executable
+`/etc/init.d/K92*` application. Adding a new package therefore adds it to the
+full ordered-pair test without maintaining a hard-coded application list.
+
 ## Developer-defined configuration
 
 Configuration is optional and belongs to the solution author. Declare it in
@@ -111,18 +138,22 @@ is ignored by the application fails the release gate.
    ./tools/prepublish.sh
    ```
 
-5. Install the exact generated package on a real reCamera, start that exact
-   solution from Studio, then verify a stable H.264 stream (multiple frames for
-   at least five seconds) reaches the WebUI endpoint:
+5. Install the exact generated package on a real reCamera. The device gate
+   refuses to run if `<app-id>` is not installed, then tests every ordered
+   switch between every installed solution and live preview. Every target must
+   expose a stable H.264 stream. With `N` camera owners it executes
+   `N × (N - 1)` transitions and restores the original owner:
 
    ```sh
    ./tools/prepublish.sh 192.168.2.102 <app-id>
    ```
 
-6. Only publish after both commands pass. GitHub Actions repeats the static
-   gate on every pull request and push.
+6. Only publish when the report ends with `failed=0`. A new application is not
+   eligible for upload if any existing-to-new, new-to-existing, or live-preview
+   transition fails. GitHub Actions repeats the static gate on every pull
+   request and push; the hardware matrix remains a mandatory pre-release gate.
 
-6. For every declared configuration item, save a non-default value and verify
+7. For every declared configuration item, save a non-default value and verify
    it reaches the process or changes observable output. Stop the solution and
    start the next one without rebooting to prove camera resources are released.
 

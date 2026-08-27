@@ -59,6 +59,24 @@ def executable(path: Path) -> bool:
     return path.is_file() and bool(path.stat().st_mode & stat.S_IXUSR)
 
 
+def validate_init_script(path: Path, init_script: str, required_files: object, fail) -> None:
+    """Reject packages that cannot participate in an atomic camera handoff."""
+    if not executable(path):
+        return
+    text = path.read_text(encoding="utf-8", errors="replace")
+    for action in ("start", "stop", "restart", "status"):
+        if not re.search(rf"(^|[|()\s]){action}\)", text, re.MULTILINE):
+            fail(f"init script must implement the {action} action")
+    if "TERM" not in text:
+        fail("init script stop must first send TERM for graceful camera release")
+    if not any(token in text for token in ("PIDFILE", "pidfile", "start-stop-daemon")):
+        fail("init script must track and stop its exact process with a PID file")
+    if re.search(r"(^|[;&|\s])(killall|pkill)(\s|$)", text):
+        fail("init script must not use broad killall/pkill process cleanup")
+    if isinstance(required_files, list) and init_script not in required_files:
+        fail("manifest required_files must include its init_script")
+
+
 def package_path(entry: dict) -> Path:
     category = entry.get("category", "other")
     folder = CATEGORY_DIRS.get(category)
@@ -271,6 +289,11 @@ def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> lis
                     continue
                 if not (root / required.lstrip("/")).exists():
                     fail(f"required file is not packaged: {required}")
+
+        if init_script.startswith("/etc/init.d/K92"):
+            validate_init_script(
+                root / init_script.lstrip("/"), init_script, required_files, fail
+            )
 
         debug_ws = manifest.get("debug_ws")
         if not isinstance(debug_ws, dict):
