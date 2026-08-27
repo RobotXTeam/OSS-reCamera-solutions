@@ -1,0 +1,14 @@
+name: Validate reCamera solutions
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  package-contract:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate catalog, packages and WebUI stream contract
+        run: python3 tools/validate_catalog.py

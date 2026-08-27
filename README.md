@@ -65,6 +65,12 @@ with the catalog sha256 as the integrity guarantee.
 
 ## Publishing a new solution version
 
+All packages must follow [PACKAGE_STANDARD.md](PACKAGE_STANDARD.md). Run
+`./tools/prepublish.sh` before uploading; after installing and starting the
+exact package on a real device, run
+`./tools/prepublish.sh <device-ip> <app-id>`. A package is not releasable until
+both checks pass.
+
 1. Build the riscv64 `.deb` package.
    Repack modern `dpkg-deb` output with gzip before publishing because the
    device's opkg 0.4.2 cannot extract `control.tar.zst` / `data.tar.zst`:
