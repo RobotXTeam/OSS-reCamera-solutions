@@ -66,6 +66,10 @@ with the catalog sha256 as the integrity guarantee.
 ## Publishing a new solution version
 
 1. Build the riscv64 `.deb` package.
+   Repack modern `dpkg-deb` output with gzip before publishing because the
+   device's opkg 0.4.2 cannot extract `control.tar.zst` / `data.tar.zst`:
+   `dpkg-deb -Zgzip -z9 --root-owner-group -b <package-root> <output.deb>`.
+   Verify with `ar t <output.deb>`; both members must end in `.tar.gz`.
 2. Copy it into `packages/<Category>/` (the entry's `category`).
 3. Compute `sha256sum` and the exact byte size.
 4. Update the matching entry (or add a new one) in `catalog.json`, keeping
