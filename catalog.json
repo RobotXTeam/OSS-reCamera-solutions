@@ -12,8 +12,8 @@
       "package_file": "face-analysis_1.4.1_riscv64.deb",
       "package_name": "face-analysis",
       "package_version": "1.4.1",
-      "size": 4307540,
-      "sha256": "b0e9fa90400837b5842c0e1c5414823ca516c3d30ca953e7872655ececb09988",
+      "size": 4323588,
+      "sha256": "9f024b5246039fa7db59f7a76706e5f38592db6667e8650cf8158051a3a90a1b",
       "urls": [
         "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/face-analysis_1.4.1_riscv64.deb",
         "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/face-analysis_1.4.1_riscv64.deb"
