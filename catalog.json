@@ -9,14 +9,14 @@
       "scene_zh": "数据采集",
       "description": "A round-the-clock audience analyst for your store: builds hourly visitor profiles by gender and age group and reads emotional feedback, informing product selection, displays and campaigns. Analysis stays on the device — no face images leave the camera.",
       "description_zh": "为门店打造的 24 小时客流分析师：按小时统计访客的性别与年龄结构，读取情绪反馈，为选品、陈列和活动提供依据。分析全程在设备本地完成，人脸图像不会离开摄像头。",
-      "package_file": "face-analysis_1.4.0_riscv64.deb",
+      "package_file": "face-analysis_1.4.1_riscv64.deb",
       "package_name": "face-analysis",
-      "package_version": "1.4.0",
-      "size": 4306358,
-      "sha256": "e4810a72cce90f19bba1971b5cdbc5cf3d8b57024489f56ca0c260ef97be4f86",
+      "package_version": "1.4.1",
+      "size": 4307540,
+      "sha256": "b0e9fa90400837b5842c0e1c5414823ca516c3d30ca953e7872655ececb09988",
       "urls": [
-        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/face-analysis_1.4.0_riscv64.deb",
-        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/face-analysis_1.4.0_riscv64.deb"
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/face-analysis_1.4.1_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/face-analysis_1.4.1_riscv64.deb"
       ],
       "category": "other",
       "demo_category": "other",
@@ -30,14 +30,14 @@
       "scene_zh": "数据采集",
       "description": "Turn the camera into a tireless data-entry clerk: meter readings, container codes, shipping labels, station tags — point and read, in Chinese and English, with results flowing straight into your system. No more manual transcription.",
       "description_zh": "把摄像头变成不知疲倦的“录入员”：仪表读数、集装箱号、面单编号、工位标签，对准即读、中英文皆可，识别结果直接进系统，告别人工抄录和录入错误。",
-      "package_file": "ppocr-reader_0.6.0_riscv64.deb",
+      "package_file": "ppocr-reader_0.6.1_riscv64.deb",
       "package_name": "ppocr-reader",
-      "package_version": "0.6.0",
-      "size": 8773976,
-      "sha256": "918fbb269f73c32dab1db1b79d502fc639d1be1af7a327110497b4d67409bffb",
+      "package_version": "0.6.1",
+      "size": 8775018,
+      "sha256": "4fe635d40620745bd1b46690e446c9bcea9c4254e5548f95970c5391e069cb44",
       "urls": [
-        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/ppocr-reader_0.6.0_riscv64.deb",
-        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/ppocr-reader_0.6.0_riscv64.deb"
+        "https://raw.githubusercontent.com/RobotXTeam/OSS-reCamera-solutions/main/packages/Other/ppocr-reader_0.6.1_riscv64.deb",
+        "https://cdn.jsdelivr.net/gh/RobotXTeam/OSS-reCamera-solutions@main/packages/Other/ppocr-reader_0.6.1_riscv64.deb"
       ],
       "category": "other",
       "demo_category": "ocr",
