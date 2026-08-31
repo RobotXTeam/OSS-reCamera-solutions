@@ -126,9 +126,9 @@ printf 'owner=%s holder=%s\\n' "$owner" "$holders"
                 verification = sudo(command, timeout=170)
                 stream = run([
                     sys.executable, str(args.stream_test), "--host", args.host,
-                    "--app-id", target, "--timeout", "25", "--min-frames", "3",
+                    "--app-id", target, "--timeout", "20", "--min-frames", "3",
                     "--observe-seconds", str(args.observe_seconds),
-                ], timeout=40)
+                ], timeout=100)
                 result.update({
                     "status": "passed",
                     "seconds": round(time.monotonic() - started, 2),

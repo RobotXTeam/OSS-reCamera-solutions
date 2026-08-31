@@ -306,6 +306,31 @@ def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> lis
             if debug_ws.get("results_path") != "/results":
                 fail("debug_ws.results_path must be /results")
 
+        # ---- Full Studio integration contract (RTSP 外发 / RGN 叠加 / MQTT+HA /
+        # 推理设置) — every published solution must reuse all of Studio. ----
+        rtsp_url = manifest.get("rtsp_url")
+        if not isinstance(rtsp_url, str) or "{host}" not in rtsp_url:
+            fail(
+                "manifest must declare rtsp_url with a {host} placeholder "
+                "(RTSP external output is mandatory)"
+            )
+        if manifest.get("result_overlay") is not True:
+            fail(
+                "manifest must set result_overlay: true "
+                "(RGN device-side overlay is mandatory)"
+            )
+        mqtt_topic = manifest.get("mqtt_topic")
+        if not isinstance(mqtt_topic, str) or not mqtt_topic:
+            fail(
+                "manifest must declare mqtt_topic "
+                "(MQTT result output + Home Assistant integration is mandatory)"
+            )
+        if "config_schema" not in manifest:
+            fail(
+                "manifest must declare config_schema "
+                "(Studio inference/connection settings are mandatory)"
+            )
+
         if "config_schema" in manifest:
             validate_config_schema(manifest["config_schema"], fail)
             run_script = root / "userdata/local/apps" / app_id / "run.sh"
@@ -325,6 +350,18 @@ def validate_entry(entry: dict, seen_ids: set[str], seen_files: set[str]) -> lis
                 fail(
                     "binary does not contain the Studio H.264-over-WebSocket "
                     "debug_stream implementation"
+                )
+            # RGN 叠加组件必须真正链入（否则 result_overlay:true 是空承诺）。
+            if "result_overlay" not in binary_strings:
+                fail(
+                    "binary does not contain the result_overlay component "
+                    "(RGN overlay must be linked to honor result_overlay: true)"
+                )
+            # MQTT/HA 发布能力必须真正链入（否则无法外发结果/接入 HA）。
+            if "ha_mqtt" not in binary_strings and "studio_mqtt" not in binary_strings:
+                fail(
+                    "binary does not contain the ha_mqtt/studio_mqtt publisher "
+                    "(MQTT result output + Home Assistant must be linked)"
                 )
 
     return errors

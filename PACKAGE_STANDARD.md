@@ -27,8 +27,44 @@ enough.
 ```
 
 The application must actually start the repository `debug_stream` component on
-port 8001 and publish H.264 frames. UDP, MQTT, RTSP and ONVIF are optional
-additional outputs; none of them replaces the WebSocket preview contract.
+port 8001 and publish H.264 frames. UDP is an optional additional output and
+never replaces the WebSocket preview contract.
+
+### Full Studio integration contract (mandatory)
+
+Every published solution must reuse **all** of Studio, not just the preview.
+The release gate (`tools/validate_catalog.py`) rejects a package missing any of
+these; the real-device gate (`tools/device_stream_test.py`) verifies them live:
+
+1. **RTSP external output** — the manifest declares `rtsp_url` with a `{host}`
+   placeholder, and the binary actually serves the encoded stream on
+   `rtsp://<ip>:8554/live` (plus `live1` when a sub stream exists).
+2. **RGN result overlay** — the manifest sets `"result_overlay": true` and the
+   binary links the `result_overlay` component, which burns the boxes into the
+   encoded RTSP stream through a VPSS overlay region. The Studio console toggle
+   (`/userdata/local/result_overlay.conf`) gates it live without a restart.
+3. **MQTT result output + Home Assistant** — the manifest declares `mqtt_topic`
+   and the binary links the `ha_mqtt`/`studio_mqtt` publisher. Results JSON is
+   published to the topic; when `/userdata/local/ha.conf` enables Home
+   Assistant, the same client runs MQTT discovery so results surface as HA
+   sensors automatically.
+4. **Inference/connection settings** — the manifest declares `config_schema`
+   (see below) and `run.sh` consumes `/userdata/local/apps/<app-id>.config.json`
+   so every declared control actually changes runtime behavior.
+
+These are verified in two layers:
+
+- Static (CI + pre-publish): `tools/validate_catalog.py` checks the manifest
+  fields and that the binary contains `debug_stream`, `result_overlay`, and
+  `ha_mqtt`/`studio_mqtt` symbols.
+- Live (pre-release, on hardware): `tools/device_stream_test.py` checks the
+  main H.264 route, the `/results` JSON envelope (timestamp/frame_id/resolution/
+  boxes), the `/sub` H.264 route, and that the RTSP listener answers. It runs
+  for every transition target inside `tools/device_transition_matrix.py`.
+
+Legacy outputs remain available but are no longer the point: UDP may still be
+offered, and ONVIF may be added on top, but a solution is only releasable when
+the four contract items above all pass.
 
 ## Camera ownership and handoff contract
 
